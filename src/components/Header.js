@@ -1,10 +1,11 @@
 import './Header.css'
+import Box from '@mui/material/Box'
 
 const Header = () => {
     return (
-        <header>
+        <Box component='header'>
             <h3>Logo</h3>
-        </header>
+        </Box>
     )
 }
 
