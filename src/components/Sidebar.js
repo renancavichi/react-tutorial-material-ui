@@ -17,11 +17,13 @@ const Sidebar = () => {
         }}>
             <h2>Sidebar</h2>
             <img 
-            style={{
-                width: 200,
-                height: 123.83
-            }}
-            src="https://i.natgeofe.com/k/830b5d15-92db-429f-a80a-cc89b5700af5/mt-everest.jpg?w=500" alt="Mountain"/>
+                style={{
+                    width: 200,
+                    height: 123.83
+                }}
+                src="https://i.natgeofe.com/k/830b5d15-92db-429f-a80a-cc89b5700af5/mt-everest.jpg?w=500"
+                alt="Mountain"
+            />
             <hr />
             <img
                 style={{
