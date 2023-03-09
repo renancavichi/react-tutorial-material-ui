@@ -10,7 +10,7 @@ const typeColor = {
 
 const typeIcon = {
     success: <MdOutlineDone style={{color: '#2f7441'}}/>,
-    error: <VscError style={{color: '#2f7441'}}/>,
+    error: <VscError style={{color: '#bd2626'}}/>,
     info: <MdInfoOutline style={{color: '#244a70'}}/>,
     warning: <MdOutlineWarningAmber style={{color: '#244a70'}}/>
 }
