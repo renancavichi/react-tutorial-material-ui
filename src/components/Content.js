@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
 import Alert from './Alert'
+import SampleUseState from './SampleUseState'
 
 const Content = () => {
 
@@ -7,7 +8,6 @@ const Content = () => {
         <Box sx={{
             background: "#EEE",
             width: 500,
-            height: 500,
             padding: '15px'
         }}>
             <h1>Content</h1>
@@ -15,18 +15,20 @@ const Content = () => {
                 <Alert type="success" >
                     Deu certo!
                 </Alert>
-
+                <br />
                 <Alert type="error">
                     Deu Erro!
                 </Alert>
-
+                <br />
                 <Alert type="info">
                     Info!
                 </Alert>
-
+                <br />
                 <Alert type="warning">
                    Warning!
-                </Alert>   
+                </Alert> 
+
+                <SampleUseState />
             
         </Box>
     )
