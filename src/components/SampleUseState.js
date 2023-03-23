@@ -4,8 +4,6 @@ const SampleUseState = () => {
 
   const [counter, setCounter] = useState(0)
   const [name, setName] =  useState('Fulano')
-
-  console.log('Component log...')
  
   return (
     <div>
