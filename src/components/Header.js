@@ -1,14 +1,16 @@
 import './Header.css'
 import Box from '@mui/material/Box'
 import {FaReact as IconReact} from 'react-icons/fa'
+import MainMenu from './MainMenu'
 
 const Header = () => {
     return (
-        <Box component='header'>
+        <Box component='header' sx={{display: 'flex', alignItems: 'center'}}>
             <Box sx={styles.stack}>
                 <IconReact style={styles.logo} />
                 <h3>Logo</h3>
             </Box>
+            <MainMenu />
         </Box>
     )
 }
