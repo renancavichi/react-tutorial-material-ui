@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Box from '@mui/material/Box'
 import { FaTrash as IconTrash, FaEdit as IconEdit } from 'react-icons/fa'
+import useAuthStore from '../store/authStore'
 
 const CardUser = ({user, setUsers, users}) => {
 
@@ -9,6 +10,9 @@ const CardUser = ({user, setUsers, users}) => {
   const [email, setEmail] = useState(user.email)
   const [pass, setPass] = useState(user.pass)
   const [avatar, setAvatar] = useState(user.avatar)
+
+  const roles = useAuthStore((state) => state.roles)
+  const isLogged = useAuthStore((state) => state.isLogged)
   
   const handleEdit = async (event) => {
     event.preventDefault()
@@ -73,9 +77,10 @@ const CardUser = ({user, setUsers, users}) => {
             <h3 style={{margin: '10px 0 5px 0'}}>{user.name}</h3>
             <p style={{margin: '0'}}>{user.email}</p>
         </Box>
-        <IconTrash style={{width: '15px', height: '15px', position: 'absolute', top: '20px', right: '20px', padding: '10px', cursor: 'pointer' }}
+        {isLogged && roles.includes('admin') && 
+        (<IconTrash style={{width: '15px', height: '15px', position: 'absolute', top: '20px', right: '20px', padding: '10px', cursor: 'pointer' }}
           onClick={() => deleteUser(user.id)}
-        />
+        />)}
          <IconEdit style={{width: '17px', height: '17px', position: 'absolute', top: '19px', right: '50px', padding: '10px', cursor: 'pointer' }}
           onClick={() => setModalOpen(true)}
         />
