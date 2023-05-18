@@ -8,10 +8,11 @@ const CardUser = ({user, setUsers, users}) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
-  const [pass, setPass] = useState(user.pass)
   const [avatar, setAvatar] = useState(user.avatar)
 
   const roles = useAuthStore((state) => state.roles)
+  const emailLogged = useAuthStore((state) => state.email)
+  const token = useAuthStore((state) => state.token)
   const isLogged = useAuthStore((state) => state.isLogged)
   
   const handleEdit = async (event) => {
@@ -19,15 +20,15 @@ const CardUser = ({user, setUsers, users}) => {
     const id = parseInt(event.target.id.value)
     const name = event.target.name.value 
     const email = event.target.email.value
-    const pass = event.target.pass.value
     const avatar = event.target.avatar.value
-    const userEdited = {id, name, email, pass, avatar}
+    const userEdited = {id, name, email, avatar}
     try {
       const response = await fetch('http://localhost:3100/user',
       {
         method: 'PUT',
         headers: {
           "Content-Type": "application/json",
+          "Authorization": token
         },
         body: JSON.stringify(userEdited), 
       })
@@ -58,6 +59,7 @@ const CardUser = ({user, setUsers, users}) => {
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",
+          "Authorization": token    
         }
       })
       const data = await response.json()
@@ -77,13 +79,14 @@ const CardUser = ({user, setUsers, users}) => {
             <h3 style={{margin: '10px 0 5px 0'}}>{user.name}</h3>
             <p style={{margin: '0'}}>{user.email}</p>
         </Box>
-        {isLogged && roles.includes('admin') && 
+        {isLogged && (roles.includes('admin') || emailLogged === user.email) && 
         (<IconTrash style={{width: '15px', height: '15px', position: 'absolute', top: '20px', right: '20px', padding: '10px', cursor: 'pointer' }}
           onClick={() => deleteUser(user.id)}
         />)}
-         <IconEdit style={{width: '17px', height: '17px', position: 'absolute', top: '19px', right: '50px', padding: '10px', cursor: 'pointer' }}
+        {isLogged && (roles.includes('admin') || emailLogged === user.email) && 
+        (<IconEdit style={{width: '17px', height: '17px', position: 'absolute', top: '19px', right: '50px', padding: '10px', cursor: 'pointer' }}
           onClick={() => setModalOpen(true)}
-        />
+        />)}
     </Box>
     {modalOpen && 
       <Box className="bgModal" onClick={(event) => {
@@ -114,7 +117,6 @@ const CardUser = ({user, setUsers, users}) => {
               <input type="hidden" name="id" value={user.id} />
               <input type="text" name="name" placeholder="Nome" value={name} onChange={e => setName(e.target.value)} /><br />
               <input type="text" name="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/><br />
-              <input type="password" name="pass" placeholder="Senha" value={pass} onChange={e => setPass(e.target.value)}/><br />
               <input type="text" name="avatar" placeholder="Avatar" value={avatar} onChange={e => setAvatar(e.target.value)}/><br />
               <br />
               <button type="submit">Editar</button>
