@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 import { FaTrash as IconTrash, FaEdit as IconEdit } from 'react-icons/fa'
 import useAuthStore from '../store/authStore'
+import { API_SERVER } from '../config'
 
 const CardUser = ({user, setUsers, users}) => {
 
@@ -23,7 +24,7 @@ const CardUser = ({user, setUsers, users}) => {
     const avatar = event.target.avatar.value
     const userEdited = {id, name, email, avatar}
     try {
-      const response = await fetch('http://localhost:3100/user',
+      const response = await fetch(`${API_SERVER}/user/`,
       {
         method: 'PUT',
         headers: {
@@ -54,7 +55,7 @@ const CardUser = ({user, setUsers, users}) => {
 
   const deleteUser = async (id) => {
     try {
-      const response = await fetch('http://localhost:3100/user/'+id,
+      const response = await fetch(`${API_SERVER}/user/${id}`,
       {
         method: 'DELETE',
         headers: {
